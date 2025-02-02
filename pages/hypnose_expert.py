@@ -2,32 +2,42 @@ import streamlit as st
 from webdav import WebDAVClient
 import hashlib
 
-# Initialize user session
-if "CURRENT_USER" not in st.session_state.keys():
-    m = hashlib.sha256()
-    m.update(st.experimental_user.email.encode())
-    st.session_state["CURRENT_USER"] = m.hexdigest()
-
 if "client" not in st.session_state.keys():
 	client = WebDAVClient(
 		base_url= st.secrets["webdav"]["url"],
 		username= st.secrets["webdav"]["email"],
 		password= st.secrets["webdav"]["psw"]
-		)
+	)
 	st.session_state["client"] = client
-else:
-	client = st.session_state["client"]
 
 if "data" not in st.session_state.keys():
-    data = client.get_json(st.secrets["webdav"]["remote_path"])
-    st.session_state["data"] = data
+	data = client.get_json(st.secrets["webdav"]["remote_path"])
+	st.session_state["data"] = data
 else:
-    data = st.session_state["data"]
+	data = st.session_state["data"]
+
+if "CURRENT_USER" not in st.session_state.keys():
+	username = st.text_input("Nom d'utilisateur", key="USERNAME")
+	if username:
+		m = hashlib.sha256()
+		m.update(username.encode())
+		username = m.hexdigest()
+		if not username in data.keys():
+			st.error("Nom d'utilisateur inconnu. Retournez à la page d'accueil pour en créer un nouveau si besoin.")
+			if st.button("Retour"):
+				st.switch_page("app.py")
+			st.stop()
+		else:
+			st.session_state["CURRENT_USER"] = username
+			st.rerun()
+	else:
+		if st.button("Retour"):
+			st.switch_page("app.py")
+		st.stop()
     
-if not st.session_state["CURRENT_USER"] in data.keys():
+if "hypnose_praticien" in data[st.session_state["CURRENT_USER"]].keys():
     st.switch_page("pages/formulaire_sd.py")
-    
-if data[st.session_state["CURRENT_USER"]]["hypnose_praticien"] == "Non":
+elif data[st.session_state["CURRENT_USER"]]["hypnose_praticien"] == "Non":
     st.switch_page("pages/kappa1.py")
 
 # Form fields

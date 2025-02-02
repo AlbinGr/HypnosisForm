@@ -2,31 +2,39 @@ import streamlit as st
 from webdav import WebDAVClient
 import hashlib
 
-if "CURRENT_USER" not in st.session_state.keys():
-	m = hashlib.sha256()
-	m.update(st.experimental_user.email.encode())
-	st.session_state["CURRENT_USER"] = m.hexdigest()
-
 if "client" not in st.session_state.keys():
 	client = WebDAVClient(
 		base_url= st.secrets["webdav"]["url"],
 		username= st.secrets["webdav"]["email"],
 		password= st.secrets["webdav"]["psw"]
-		)
+	)
 	st.session_state["client"] = client
-else:
-	client = st.session_state["client"]
 
 if "data" not in st.session_state.keys():
-    data = client.get_json(st.secrets["webdav"]["remote_path"])
-    st.session_state["data"] = data
+	data = client.get_json(st.secrets["webdav"]["remote_path"])
+	st.session_state["data"] = data
 else:
-    data = st.session_state["data"]
-if not st.session_state["CURRENT_USER"] in data.keys():
-	# Create new user entry
-	data[st.session_state["CURRENT_USER"]] = {}
-	client.put_json(st.secrets["webdav"]["remote_path"], data)
+	data = st.session_state["data"]
 
+if "CURRENT_USER" not in st.session_state.keys():
+	username = st.text_input("Nom d'utilisateur", key="USERNAME")
+	if username:
+		m = hashlib.sha256()
+		m.update(username.encode())
+		username = m.hexdigest()
+		if not username in data.keys():
+			st.error("Nom d'utilisateur inconnu. Retournez à la page d'accueil pour en créer un nouveau si besoin.")
+			if st.button("Retour"):
+				st.switch_page("app.py")
+			st.stop()
+		else:
+			st.session_state["CURRENT_USER"] = username
+			st.rerun()
+	else:
+		if st.button("Retour"):
+			st.switch_page("app.py")
+		st.stop()
+    
 # Here we include the form to collect the data, streamlit display etc...
 # Form fields
 st.title("Formulaire Kappa")
