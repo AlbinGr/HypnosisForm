@@ -1,8 +1,11 @@
 import streamlit as st
 from webdav import WebDAVClient
+import hashlib
 
 if "CURRENT_USER" not in st.session_state.keys():
-    st.session_state["CURRENT_USER"] =  st.experimental_user.to_dict()["email"]
+    m = hashlib.sha256()
+    m.update(st.experimental_user.email.encode())
+    st.session_state["CURRENT_USER"] = m.hexdigest()
 
     
 
