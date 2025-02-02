@@ -9,12 +9,8 @@ if "client" not in st.session_state.keys():
 		password= st.secrets["webdav"]["psw"]
 	)
 	st.session_state["client"] = client
-
-if "data" not in st.session_state.keys():
-	data = client.get_json(st.secrets["webdav"]["remote_path"])
-	st.session_state["data"] = data
 else:
-	data = st.session_state["data"]
+	client = st.session_state["client"]
 
 if "CURRENT_USER" not in st.session_state.keys():
 	username = st.text_input("Nom d'utilisateur", key="USERNAME")
@@ -22,7 +18,9 @@ if "CURRENT_USER" not in st.session_state.keys():
 		m = hashlib.sha256()
 		m.update(username.encode())
 		username = m.hexdigest()
-		if not username in data.keys():
+
+		# Check if the user exists
+		if not client.file_exists(st.secrets["webdav"]["remote_path"] + f"{username}.json"):
 			st.error("Nom d'utilisateur inconnu. Retournez à la page d'accueil pour en créer un nouveau si besoin.")
 			if st.button("Retour"):
 				st.switch_page("app.py")
@@ -34,8 +32,14 @@ if "CURRENT_USER" not in st.session_state.keys():
 		if st.button("Retour"):
 			st.switch_page("app.py")
 		st.stop()
+
+if "data" not in st.session_state.keys():
+	data = client.get_json(st.secrets["webdav"]["remote_path"] + f"{st.session_state['CURRENT_USER']}.json")
+	st.session_state["data"] = data
+else:
+	data = st.session_state["data"]
     
-if "hypnose_praticien" in data[st.session_state["CURRENT_USER"]].keys():
+if "hypnose_praticien" not in data[st.session_state["CURRENT_USER"]].keys():
     st.switch_page("pages/formulaire_sd.py")
 elif data[st.session_state["CURRENT_USER"]]["hypnose_praticien"] == "Non":
     st.switch_page("pages/kappa1.py")
@@ -45,48 +49,56 @@ st.title("Formulaire SD expert")
 
 data[st.session_state["CURRENT_USER"]]["experience_hypnotherapie"] = st.text_input(
     "Depuis combien de temps pratiquez-vous l'hypnothérapie ?",
-    value=data[st.session_state["CURRENT_USER"]].get("experience_hypnotherapie", "")
+    value=data[st.session_state["CURRENT_USER"]].get("experience_hypnotherapie", ""),
+    key="experience_hypnotherapie"
 )
 
 data[st.session_state["CURRENT_USER"]]["diplome_principal"] = st.text_input(
     "Quel est votre diplôme principal dans le domaine médical ou paramédical ?",
-    value=data[st.session_state["CURRENT_USER"]].get("diplome_principal", "")
+    value=data[st.session_state["CURRENT_USER"]].get("diplome_principal", ""),
+    key="diplome_principal"
 )
 
 formation_hypnose = st.radio(
     "Avez-vous eu une formation en lien avec l’hypnose ?", 
     ["Oui", "Non"],
-    index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("formation_hypnose", "Non"))
+    index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("formation_hypnose", "Non")),
+    key="formation_hypnose"
 )
 data[st.session_state["CURRENT_USER"]]["formation_hypnose"] = formation_hypnose
 if formation_hypnose == "Oui":
     data[st.session_state["CURRENT_USER"]]["details_formation_hypnose"] = st.text_input(
         "Si oui, la ou lesquelles ? En quelle année l'avez-vous réalisée ?",
-        value=data[st.session_state["CURRENT_USER"]].get("details_formation_hypnose", "")
+        value=data[st.session_state["CURRENT_USER"]].get("details_formation_hypnose", ""),
+        key="details_formation_hypnose"
     )
 
 connaissance_relaxation = st.radio(
     "Avez-vous des connaissances ou une expérience particulière dans d'autres techniques de relaxation ou de méditation ?",
     ["Oui", "Non"],
-    index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("connaissance_relaxation", "Non"))
+    index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("connaissance_relaxation", "Non")),
+    key="connaissance_relaxation"
 )
 data[st.session_state["CURRENT_USER"]]["connaissance_relaxation"] = connaissance_relaxation
 if connaissance_relaxation == "Oui":
     data[st.session_state["CURRENT_USER"]]["details_relaxation"] = st.text_input(
         "Si oui, pourriez-vous préciser ?",
-        value=data[st.session_state["CURRENT_USER"]].get("details_relaxation", "")
+        value=data[st.session_state["CURRENT_USER"]].get("details_relaxation", ""),
+        key="details_relaxation"
     )
 
 experience_transe = st.radio(
     "Avez-vous déjà eu des expériences personnelles liées à la transe hypnotique (détente profonde, altération de la perception du temps, etc.) ?",
     ["Oui", "Non"],
-    index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("experience_transe", "Non"))
+    index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("experience_transe", "Non")),
+    key="experience_transe"
 )
 data[st.session_state["CURRENT_USER"]]["experience_transe"] = experience_transe
 if experience_transe == "Oui":
     data[st.session_state["CURRENT_USER"]]["details_transe"] = st.text_area(
         "Si oui, pouvez-vous brièvement décrire cette expérience ?",
-        value=data[st.session_state["CURRENT_USER"]].get("details_transe", "")
+        value=data[st.session_state["CURRENT_USER"]].get("details_transe", ""),
+        key="details_transe"
     )
 
 
@@ -97,7 +109,7 @@ col1, col2 = st.columns(2)
 
 with col2:
     if st.button("Continuer"):
-        client.put_json(st.secrets["webdav"]["remote_path"], data)
+        client.put_json(st.secrets["webdav"]["remote_path"]  + f"{st.session_state['CURRENT_USER']}.json", data)
         st.switch_page("pages/kappa1.py")
 
 with col1:

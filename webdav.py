@@ -32,6 +32,9 @@ class WebDAVClient:
                 f.write(data)
             self.upload_file(tempfilename, remote_path)
 
+    def file_exists(self, remote_path):
+        return self.client.check(remote_path)
+
     def get_audio(self, remote_path): 
         with tempfile.TemporaryDirectory() as tempdirname:
             tempfilename = os.path.join(tempdirname, "temp.wav")
