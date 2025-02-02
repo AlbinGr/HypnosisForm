@@ -10,6 +10,7 @@ __pycache__/
 *.ipynb
 *.pdf 
 
+secret.toml
 
 # Distribution / packaging
 .Python
