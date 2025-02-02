@@ -21,7 +21,8 @@ if "data" not in st.session_state.keys():
 		data[st.session_state["CURRENT_USER"]] = {}
 		client.put_json(st.secrets["webdav"]["remote_path"], data)
 	st.session_state["data"] = data
-
+else:
+	data = st.session_state["data"]
 # Here we include the form to collect the data, streamlit display etc... 
 # Form fields
 st.title("Questionnaire socio-démographique")
