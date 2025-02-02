@@ -6,7 +6,7 @@ if "CURRENT_USER" not in st.session_state.keys():
 	m.update(st.experimental_user.email.encode())
 	st.session_state["CURRENT_USER"] = m.hexdigest()
 
-st.write(f"Hello {st.session_state["CURRENT_USER"]}!")
+st.write(f"Hello {st.session_state['CURRENT_USER']}!")
 
 if "client" not in st.session_state.keys():
 	client = WebDAVClient(
