@@ -89,6 +89,9 @@ if experience_transe == "Oui":
         value=data[st.session_state["CURRENT_USER"]].get("details_transe", "")
     )
 
+
+st.session_state["data"] = data
+
 # Submit button
 col1, col2 = st.columns(2)
 

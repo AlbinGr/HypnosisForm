@@ -113,6 +113,9 @@ data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_dans_u
 	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_dans_un_lieu_prive", "Non"))
 )
 
+
+
+st.session_state["data"] = data
 # Continue and return button, saving the data to server
 col1, col2 = st.columns(2)
 

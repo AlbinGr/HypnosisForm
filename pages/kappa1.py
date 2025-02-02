@@ -112,6 +112,9 @@ data[st.session_state["CURRENT_USER"]]["vousSentez_vous_en_securite_dans_votre_e
 	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("vousSentez_vous_en_securite_dans_votre_environnement_actuel", "Non"))
 )
 
+
+
+st.session_state["data"] = data
 # Continue and return button, saving the data to server
 col1, col2 = st.columns(2)
 

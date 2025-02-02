@@ -86,6 +86,9 @@ data["experience_transe"] = experience_transe
 if experience_transe == "Oui":
     data["details_transe"] = st.text_area("Si oui, pouvez-vous brièvement décrire cette expérience ?", value=default_details_transe)
 
+
+
+st.session_state["data"] = data
 # Submit button
 
 col1, col2 = st.columns(2)

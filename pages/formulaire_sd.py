@@ -9,6 +9,8 @@ if "client" not in st.session_state.keys():
 		password= st.secrets["webdav"]["psw"]
 	)
 	st.session_state["client"] = client
+else:
+	client = st.session_state["client"]
 
 if "data" not in st.session_state.keys():
 	data = client.get_json(st.secrets["webdav"]["remote_path"])
@@ -123,6 +125,8 @@ if hypnose_praticien == "Oui":
 		"Si oui, à quelle fréquence ?", 
 		value=data[st.session_state["CURRENT_USER"]].get("fréquence_hypnose_praticien", "")
 	)
+
+st.session_state["data"] = data
 
 col1, col2 = st.columns(2)
 # Continue and return button, saving the data to server
