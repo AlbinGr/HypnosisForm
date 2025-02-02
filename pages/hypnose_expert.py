@@ -8,15 +8,17 @@ if "CURRENT_USER" not in st.session_state.keys():
     m.update(st.experimental_user.email.encode())
     st.session_state["CURRENT_USER"] = m.hexdigest()
 
- 
+if "client" not in st.session_state.keys():
+	client = WebDAVClient(
+		base_url= st.secrets["webdav"]["url"],
+		username= st.secrets["webdav"]["email"],
+		password= st.secrets["webdav"]["psw"]
+		)
+	st.session_state["client"] = client
+else:
+	client = st.session_state["client"]
 
 if "data" not in st.session_state.keys():
-    client = WebDAVClient(
-        base_url= st.secrets["webdav"]["url"],
-        username= st.secrets["webdav"]["email"],
-        password= st.secrets["webdav"]["psw"]
-        )
-    
     data = client.get_json(st.secrets["webdav"]["remote_path"])
     st.session_state["data"] = data
 else:
