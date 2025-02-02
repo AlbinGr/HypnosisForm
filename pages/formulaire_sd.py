@@ -6,17 +6,21 @@ if "CURRENT_USER" not in st.session_state.keys():
 	m.update(st.experimental_user.email.encode())
 	st.session_state["CURRENT_USER"] = m.hexdigest()
 
+	
+if "data" not in st.session_state.keys():
+
 	client = WebDAVClient(
 		base_url= st.secrets["webdav"]["url"],
 		username= st.secrets["webdav"]["email"],
 		password= st.secrets["webdav"]["psw"]
 		)
-
+	
 	data = client.get_json(st.secrets["webdav"]["remote_path"])
 	if not st.session_state["CURRENT_USER"] in data.keys():
 		# Create new user entry
 		data[st.session_state["CURRENT_USER"]] = {}
 		client.put_json(st.secrets["webdav"]["remote_path"], data)
+	st.session_state["data"] = data
 
 # Here we include the form to collect the data, streamlit display etc... 
 # Form fields

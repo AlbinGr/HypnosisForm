@@ -8,14 +8,23 @@ if "CURRENT_USER" not in st.session_state.keys():
     m.update(st.experimental_user.email.encode())
     st.session_state["CURRENT_USER"] = m.hexdigest()
 
-    # Connect to WebDAV
-    client = WebDAVClient(
-        base_url=st.secrets["webdav"]["url"],
-        username=st.secrets["webdav"]["email"],
-        password=st.secrets["webdav"]["psw"]
-    )
+if "data" not in st.session_state.keys():
+	client = WebDAVClient(
+		base_url= st.secrets["webdav"]["url"],
+		username= st.secrets["webdav"]["email"],
+		password= st.secrets["webdav"]["psw"]
+		)
+	
+	data = client.get_json(st.secrets["webdav"]["remote_path"])
+	if not st.session_state["CURRENT_USER"] in data.keys():
+		# Create new user entry
+		data[st.session_state["CURRENT_USER"]] = {}
+		client.put_json(st.secrets["webdav"]["remote_path"], data)
+	st.session_state["data"] = data
+else:
+    data = st.session_state["data"]
+     
 
-    data = client.get_json(st.secrets["webdav"]["remote_path"])
 if not st.session_state["CURRENT_USER"] in data.keys():
     st.switch_page("pages/formulaire_sd.py")
 if data[st.session_state["CURRENT_USER"]]["hypnose_patient"] == "Non":

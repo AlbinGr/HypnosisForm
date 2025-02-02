@@ -13,15 +13,6 @@ if "has_rerun" not in st.session_state:
 
 st.write(f"Hello {st.session_state['CURRENT_USER']}!")
 
-# Create a connection object.
-data_client = WebDAVClient(
-    base_url= st.secrets["webdav"]["url"],
-    username= st.secrets["webdav"]["email"],
-    password= st.secrets["webdav"]["psw"]
-)
-
-
-
 # Get the list of files in the root directory.
 st.warning("INFORMATION D'UTILISATION DES DONNÉES ETC...")
 
