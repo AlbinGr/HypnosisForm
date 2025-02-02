@@ -17,7 +17,7 @@ client = WebDAVClient(
 
 data = client.get_json(st.secrets["webdav"]["remote_path"])
 if not st.session_state["CURRENT_USER"] in data.keys():
-    switch_page("pages/formulaire_sd.py")
+    st.switch_page("pages/formulaire_sd.py")
     
 if data[st.session_state["CURRENT_USER"]]["hypnose_praticien"] == "Non":
 	st.switch_page("pages/kappa1.py")
