@@ -1,41 +1,39 @@
 import streamlit as st
-from datetime import date
+from webdav import WebDAVClient
 
-st.title("Form")
+if "CURRENT_USER" not in st.session_state.keys():
+    st.session_state["CURRENT_USER"] =  st.experimental_user.to_dict()["email"]
 
-# Name Input
-st.header("Name")
-first_name = st.text_input("First Name", placeholder="Enter your first name")
-last_name = st.text_input("Last Name", placeholder="Enter your last name")
+    
 
-# Email Input
-st.header("Email")
-email = st.text_input("Email", placeholder="example@example.com")
+st.config.set_option("client.showSidebarNavigation", False)
+if "has_rerun" not in st.session_state:
+    st.session_state.has_rerun = True
+    st.rerun()
 
-# Address Input
-st.header("Address")
-street_address = st.text_input("Street Address", placeholder="Enter your street address")
-address_line_2 = st.text_input("Street Address Line 2 (Optional)", placeholder="Apartment, suite, etc.")
-city = st.text_input("City", placeholder="Enter your city")
-state = st.text_input("State/Province", placeholder="Enter your state or province")
-postal_code = st.text_input("Postal/Zip Code", placeholder="Enter your postal or zip code")
+st.write(f"Hello {st.session_state['CURRENT_USER']}!")
 
-# Rating Questions
-st.header("Questions")
-question_1 = st.radio("Type a question (1)", options=[1, 2, 3, 4, 5], horizontal=True)
-question_2 = st.radio("Type a question (2)", options=[1, 2, 3, 4, 5], horizontal=True)
+# Create a connection object.
+data_client = WebDAVClient(
+    base_url= st.secrets["webdav"]["url"],
+    username= st.secrets["webdav"]["email"],
+    password= st.secrets["webdav"]["psw"]
+)
 
-# Submit Button
-if st.button("Submit"):
-    st.success("Form submitted successfully!")
-    st.write("### Submitted Information")
-    st.write(f"**Name:** {first_name} {last_name}")
-    st.write(f"**Email:** {email}")
-    st.write(f"**Street Address:** {street_address}")
-    if address_line_2:
-        st.write(f"**Street Address Line 2:** {address_line_2}")
-    st.write(f"**City:** {city}")
-    st.write(f"**State/Province:** {state}")
-    st.write(f"**Postal/Zip Code:** {postal_code}")
-    st.write(f"**Question 1 Rating:** {question_1}")
-    st.write(f"**Question 2 Rating:** {question_2}")
+
+
+# Get the list of files in the root directory.
+st.warning("INFORMATION D'UTILISATION DES DONNÉES ETC...")
+
+understood = st.checkbox("J'ai lu et compris ...", value=False)
+
+if st.button("Commencer le questionnaire"):
+    if understood:
+        st.switch_page("pages/formulaire_sd.py")
+    else:
+        st.error("Veuillez lire et comprendre les informations d'utilisation des données.")
+
+
+if st.experimental_user["email"] == "test@example.com":
+    if st.button("Reset Session"):
+        data_client.put_json(st.secrets["webdav"]["remote_path"], {})
