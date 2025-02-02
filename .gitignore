@@ -9,8 +9,7 @@ __pycache__/
 # Local file
 *.ipynb
 *.pdf 
-
-secret.toml
+secrets.toml
 
 # Distribution / packaging
 .Python

@@ -33,7 +33,3 @@ if st.button("Commencer le questionnaire"):
     else:
         st.error("Veuillez lire et comprendre les informations d'utilisation des données.")
 
-
-if st.experimental_user["email"] == "test@example.com":
-    if st.button("Reset Session"):
-        data_client.put_json(st.secrets["webdav"]["remote_path"], {})
