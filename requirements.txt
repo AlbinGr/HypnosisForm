@@ -2,3 +2,4 @@ streamlit
 pandas
 numpy
 webdavclient3
+librosa
