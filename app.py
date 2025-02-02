@@ -15,6 +15,7 @@ if "has_rerun" not in st.session_state:
     st.rerun()
 
 st.write(f"Hello {st.session_state['CURRENT_USER']}!")
+st.write("Test")
 
 # Get the list of files in the root directory.
 st.warning("INFORMATION D'UTILISATION DES DONNÉES ETC...")
