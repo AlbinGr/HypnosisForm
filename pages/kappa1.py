@@ -42,99 +42,80 @@ else:
 
 # Here we include the form to collect the data, streamlit display etc...
 # Form fields
-st.title("Formulaire Kappa")
+# Form fields
+st.title("Questionnaire de suggestibilité kappasien")
 
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_a_lecole_primaire"] = st.radio(
-	"Avez-vous été victime d'intimidation à l'école primaire ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_a_lecole_primaire", "Non")),
-	key="avezvousEte_victime_dintimidation_a_lecole_primaire"
-)
-data[st.session_state["CURRENT_USER"]]["aLadolescence_avezvous_ete_victime_dintimidation"] = st.radio(
-	"A l'adolescence, avez-vous été victime d'intimidation ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("aLadolescence_avezvous_ete_victime_dintimidation", "Non")),
-	key="aLadolescence_avezvous_ete_victime_dintimidation"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_au_travail"] = st.radio(
-	"Avez-vous été victime d'intimidation au travail ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_au_travail", "Non")),
-	key="avezvousEte_victime_dintimidation_au_travail"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousLimpression_que_lintimidation_a_affecte_votre_vie"] = st.radio(
-	"Avez-vous l'impression que l'intimidation a affecté votre vie ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousLimpression_que_lintimidation_a_affecte_votre_vie", "Non")),
-	key="avezvousLimpression_que_lintimidation_a_affecte_votre_vie"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_dans_votre_quartier"] = st.radio(
-	"Avez-vous été victime d'intimidation dans votre quartier ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_dans_votre_quartier", "Non")),
-	key="avezvousEte_victime_dintimidation_dans_votre_quartier"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_sur_les_reseaux_sociaux"] = st.radio(
-	"Avez-vous été victime d'intimidation sur les réseaux sociaux ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_sur_les_reseaux_sociaux", "Non")),
-	key="avezvousEte_victime_dintimidation_sur_les_reseaux_sociaux"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_dans_un_club_ou_une_organisation"] = st.radio(
-	"Avez-vous été victime d'intimidation dans un club ou une organisation ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_dans_un_club_ou_une_organisation", "Non")),
-	key="avezvousEte_victime_dintimidation_dans_un_club_ou_une_organisation"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_dans_une_relation_amoureuse"] = st.radio(
-	"Avez-vous été victime d'intimidation dans une relation amoureuse ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_dans_une_relation_amoureuse", "Non")),
-	key="avezvousEte_victime_dintimidation_dans_une_relation_amoureuse"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousLimpression_que_lintimidation_a_affecte_votre_sante_mentale"] = st.radio(
-	"Avez-vous l'impression que l'intimidation a affecté votre santé mentale ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousLimpression_que_lintimidation_a_affecte_votre_sante_mentale", "Non")),
-	key="avezvousLimpression_que_lintimidation_a_affecte_votre_sante_mentale"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_par_un_membre_de_votre_famille"] = st.radio(
-	"Avez-vous été victime d'intimidation par un membre de votre famille ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_par_un_membre_de_votre_famille", "Non")),
-	key="avezvousEte_victime_dintimidation_par_un_membre_de_votre_famille"
-)
-data[st.session_state["CURRENT_USER"]]["lorsqueVous_etes_victime_dintimidation_comment_reagissezvous"] = st.radio(
-	"Lorsque vous êtes victime d'intimidation, comment réagissez-vous ?", ["Je me défends", "Je me tais", "Je demande de l'aide"], 
-	index=["Je me défends", "Je me tais", "Je demande de l'aide"].index(data[st.session_state["CURRENT_USER"]].get("lorsqueVous_etes_victime_dintimidation_comment_reagissezvous", "Je me tais")),
-	key="lorsqueVous_etes_victime_dintimidation_comment_reagissezvous"
-)
-data[st.session_state["CURRENT_USER"]]["aimezvous_interagir_avec_les_autres"] = st.radio(
-	"Aimez-vous interagir avec les autres ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("aimezvous_interagir_avec_les_autres", "Non")),
-	key="aimezvous_interagir_avec_les_autres"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_en_ligne"] = st.radio(
-	"Avez-vous été victime d'intimidation en ligne ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_en_ligne", "Non")),
-	key="avezvousEte_victime_dintimidation_en_ligne"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_dans_un_lieu_public"] = st.radio(
-	"Avez-vous été victime d'intimidation dans un lieu public ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_dans_un_lieu_public", "Non")),
-	key="avezvousEte_victime_dintimidation_dans_un_lieu_public"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_par_un_inconnu"] = st.radio(
-	"Avez-vous été victime d'intimidation par un inconnu ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_par_un_inconnu", "Non")),
-	key="avezvousEte_victime_dintimidation_par_un_inconnu"
-)
-data[st.session_state["CURRENT_USER"]]["avezvousEte_victime_dintimidation_par_un_collegue"] = st.radio(
-	"Avez-vous été victime d'intimidation par un collègue ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("avezvousEte_victime_dintimidation_par_un_collegue", "Non")),
-	key="avezvousEte_victime_dintimidation_par_un_collegue"
-)
-data[st.session_state["CURRENT_USER"]]["pensezvous_etre_une_personne_intimidante"] = st.radio(
-	"Pensez-vous être une personne intimidante ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("pensezvous_etre_une_personne_intimidante", "Non")),
-	key="pensezvous_etre_une_personne_intimidante"
-)
-data[st.session_state["CURRENT_USER"]]["vousSentez_vous_en_securite_dans_votre_environnement_actuel"] = st.radio(
-	"Vous sentez-vous en sécurité dans votre environnement actuel ?", ["Oui", "Non"], 
-	index=["Oui", "Non"].index(data[st.session_state["CURRENT_USER"]].get("vousSentez_vous_en_securite_dans_votre_environnement_actuel", "Non")),
-	key="vousSentez_vous_en_securite_dans_votre_environnement_actuel"
+data[st.session_state["CURRENT_USER"]]["somnambulisme_adulte"] = st.radio(
+    "Avez-vous été sujet à du somnambulisme depuis que vous avez atteint l’âge adulte ?", ["Oui", "Non"], index=None
 )
 
+data[st.session_state["CURRENT_USER"]]["aisance_expression_sentiments"] = st.radio(
+    "À l’adolescence, vous sentiez-vous à l’aise pour exprimer vos sentiments à l’un ou l’autre de vos figures maternelles ou paternelles ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["contact_visuel_proche"] = st.radio(
+    "Avez-vous tendance à regarder directement les personnes dans les yeux et/ou vous approcher d’eux lorsque vous discutez d’un sujet intéressant ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["perception_autrui_critique"] = st.radio(
+    "Avez-vous l’impression que la plupart des gens que vous rencontrez pour la première fois ne sont pas critiques à l’égard de votre apparence ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["aisance_conversation_groupe"] = st.radio(
+    "Dans un groupe avec des personnes que vous venez de rencontrer, vous sentiriez-vous à l’aise d’attirer l’attention sur vous en lançant la conversation ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["affection_publique"] = st.radio(
+    "Vous sentez-vous confortable de tenir la main ou de prendre dans les bras la personne avec qui vous êtes en couple lorsque vous êtes en présence d’autres personnes ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["empathie_chaleur_physique"] = st.radio(
+    "Quand quelqu’un parle de se sentir au chaud physiquement, commencez-vous également à ressentir de la chaleur ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["ecoute_attention"] = st.radio(
+    "Vous arrive-t-il parfois de ne plus vraiment écouter lorsque quelqu’un vous parle, au point de ne même plus entendre ce que l’autre personne dit, parce que vous êtes anxieux(se) de préparer votre réponse ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["apprentissage_visuel"] = st.radio(
+    "Avez-vous l’impression que vous apprenez et comprenez mieux en voyant et/ou en lisant par rapport à lorsque vous l’entendez ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["aisance_questions_public"] = st.radio(
+    "Lors d’un nouveau cours ou conférence, vous sentez-vous généralement à l’aise de poser des questions devant le groupe ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["importance_details_expression"] = st.radio(
+    "Lorsque vous exprimez vos idées, trouvez-vous important de présenter tous les détails afin que l’autre personne puisse bien comprendre complètement ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["interaction_enfants"] = st.radio(
+    "Aimez-vous interagir avec les enfants ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["aisance_mouvements_public"] = st.radio(
+    "Trouvez-vous facile d’être à l’aise et détendu(e) dans vos mouvements corporels, même en présence de personnes inconnues ou dans des situations inhabituelles ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["lecture_fiction_preference"] = st.radio(
+    "Préférez-vous lire de la fiction plutôt que des ouvrages non fictifs ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["reponse_salive_citron"] = st.radio(
+    "Si vous deviez imaginer manger un citron jaune, juteux et acide, votre bouche se mettrait-elle à saliver ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["aisance_reception_compliment"] = st.radio(
+    "Si vous estimez mériter un compliment pour quelque chose de bien fait, vous sentez-vous à l’aise de recevoir ce compliment devant d’autres personnes ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["bon_interlocuteur"] = st.radio(
+    "Pensez-vous être un bon interlocuteur ?", ["Oui", "Non"], index=None
+)
+
+data[st.session_state["CURRENT_USER"]]["aisance_attention_flatterie"] = st.radio(
+    "Vous sentez-vous à l’aise lorsque l’on attire une attention flatteuse sur votre corps ou votre apparence physique ?", ["Oui", "Non"], index=None
+)
 
 st.session_state["data"] = data
 # Continue and return button, saving the data to server
@@ -142,8 +123,16 @@ col1, col2 = st.columns(2)
 
 with col2:
 	if st.button("Continuer"):
-		client.put_json(st.secrets["webdav"]["remote_path"]  + f"{st.session_state['CURRENT_USER']}.json", data)
-		st.switch_page("pages/kappa2.py")
+		# Check if any of the radio buttons is None
+		error = False
+		for key, value in data[st.session_state["CURRENT_USER"]].items():
+			if value is None:
+				st.error("Veuillez répondre à toutes les questions avant de continuer.")
+				error = True
+				break
+		if not error:
+			client.put_json(st.secrets["webdav"]["remote_path"]  + f"{st.session_state['CURRENT_USER']}.json", data)
+			st.switch_page("pages/kappa2.py")
 
 with col1:
 	if st.button("Retour"):
