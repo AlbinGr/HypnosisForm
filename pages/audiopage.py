@@ -1,43 +1,37 @@
 import streamlit as st
 from webdav import WebDAVClient
-import hashlib
+from authentification import login, logout
 
 if "client" not in st.session_state.keys():
-	client = WebDAVClient(
-		base_url= st.secrets["webdav"]["url"],
-		username= st.secrets["webdav"]["email"],
-		password= st.secrets["webdav"]["psw"]
-	)
-	st.session_state["client"] = client
+    client = WebDAVClient(
+        base_url= st.secrets["webdav"]["url"],
+        username= st.secrets["webdav"]["email"],
+        password= st.secrets["webdav"]["psw"]
+    )
+    st.session_state["client"] = client
 else:
-	client = st.session_state["client"]
+    client = st.session_state["client"]
 
-if "CURRENT_USER" not in st.session_state.keys():
-	username = st.text_input("Nom d'utilisateur", key="USERNAME")
-	if username:
-		m = hashlib.sha256()
-		m.update(username.encode())
-		username = m.hexdigest()
 
-		# Check if the user exists
-		if not client.file_exists(st.secrets["webdav"]["remote_path"] + f"{username}.json"):
-			st.error("Nom d'utilisateur inconnu. Retournez à la page d'accueil pour en créer un nouveau si besoin.")
-			if st.button("Retour"):
-				st.switch_page("app.py")
-			st.stop()
-		else:
-			st.session_state["CURRENT_USER"] = username
-			st.rerun()
-	else:
-		if st.button("Retour"):
-			st.switch_page("app.py")
-		st.stop()
 
-if "data" not in st.session_state.keys():
-	data = client.get_json(st.secrets["webdav"]["remote_path"] + f"{st.session_state['CURRENT_USER']}.json")
-	st.session_state["data"] = data
+if "current_user" not in st.session_state.keys() or st.session_state["current_user"] is None:
+    col1, col2 = st.columns(2, vertical_alignment="bottom")
+    with col1:
+        login("Login", "pages/kappa2.py")
+    with col2:
+        if st.button("Return to homepage"):
+            st.switch_page("app.py")
+    st.stop()
+
+    
+logout("Logout", "app.py")
+
+
+if "data" not in st.session_state.keys() or st.session_state["data"] is None:
+    data = st.session_state["client"].get_json(st.secrets["webdav"]["remote_path"] + f"{st.session_state['current_user']}.json")
+    st.session_state["data"] = data
 else:
-	data = st.session_state["data"]
+    data = st.session_state["data"]
 
 st.title("Évaluation d'écoute")
 
