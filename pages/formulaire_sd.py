@@ -100,7 +100,7 @@ data["problèmes_auditifs"] = st.radio(
     "Avez-vous déjà présenté des problèmes auditifs ?", 
     ["Oui", "Non"], 
     key="problèmes_auditifs", 
-    index=["Oui", "Non"].index(data.get("problèmes_auditifs", None) if data.get("problèmes_auditifs", None) is not None else None)
+    index=["Oui", "Non"].index(data.get("problèmes_auditifs", None)) if data.get("problèmes_auditifs", None) is not None else None
 )
 if data["problèmes_auditifs"] == "Oui":
     data["détails_problèmes_auditifs"] = st.text_input(
