@@ -44,7 +44,7 @@ data["paralysie_sommeil"] = st.radio(
 )
 
 data["sensibilite_ton_voix"] = st.radio(
-    "Lorsque vous étiez enfant, vous sentiez-vous plus affecté(e) par le ton de voix de vos figures parentales que par ce qu’elles disaient réellement ?", ["Oui", "Non"], 
+    "Lorsque vous étiez enfant, vous sentiez-vous plus affecté(e) par le ton de la voix de vos figures parentales que par ce qu’elles disaient réellement ?", ["Oui", "Non"], 
     index= ["Oui", "Non"].index(data.get("sensibilite_ton_voix", None)) if data.get("sensibilite_ton_voix", None) is not None else None,
     key="sensibilite_ton_voix"
 )
@@ -139,7 +139,7 @@ data["gene_regard_direct"] = st.radio(
 )
 
 data["gene_conversation_groupe"] = st.radio(
-    "Dans un groupe de personnes que vous venez de rencontrer, vous sentiriez-vous mal à l’aise d’attirer l’attention sur vous en initiant la conversation ?", ["Oui", "Non"], 
+    "Dans un groupe de personnes que vous venez de rencontrer, vous sentez-vous mal à l’aise d’attirer l’attention sur vous en initiant la conversation ?", ["Oui", "Non"], 
     index= ["Oui", "Non"].index(data.get("gene_conversation_groupe", None)) if data.get("gene_conversation_groupe", None) is not None else None,
     key="gene_conversation_groupe"
 )

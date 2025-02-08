@@ -62,7 +62,7 @@ formation_hypnose = st.radio(
 data["formation_hypnose"] = formation_hypnose
 if formation_hypnose == "Oui":
     data["details_formation_hypnose"] = st.text_input(
-        "Si oui, la ou lesquelles ? En quelle année l'avez-vous réalisée ?",
+        "Si oui, quel est l’intitulé de cette formation/certification ? En quelle année avez-vous été diplômé/certifié ?",
         key="details_formation_hypnose", 
         value = data.get("details_formation_hypnose", None)
     )
@@ -77,24 +77,9 @@ data["connaissance_relaxation"] = connaissance_relaxation
 if connaissance_relaxation == "Oui":
     data["details_relaxation"] = st.text_input(
         "Si oui, pourriez-vous préciser ?",
-        value=data.get("details_relaxation", None),
+        value=data.get("details_relaxation", ""),
         key="details_relaxation"
     )
-
-experience_transe = st.radio(
-    "Avez-vous déjà eu des expériences personnelles liées à la transe hypnotique (détente profonde, altération de la perception du temps, etc.) ?",
-    ["Oui", "Non"],
-    index=["Oui", "Non"].index(data.get("experience_transe", None)) if data.get("experience_transe", None) is not None else None,
-    key="experience_transe"
-)
-data["experience_transe"] = experience_transe
-if experience_transe == "Oui":
-    data["details_transe"] = st.text_area(
-        "Si oui, pouvez-vous brièvement décrire cette expérience ?",
-        value=data.get("details_transe", None),
-        key="details_transe"
-    )
-
 
 st.session_state["data"] = data
 

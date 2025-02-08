@@ -36,14 +36,17 @@ else:
 st.title("Évaluation d'écoute")
 
 st.header("Pour information :")
-st.write("L’état de transe hypnotique est un état modifié de conscience caractérisé par une focalisation intense sur\
-		 une idée ou une sensation, une diminution de la perception de l’environnement extérieur et une ouverture\
-		 accrue aux suggestions. Ce n’est pas une perte de contrôle ou de conscience, mais un état dans lequel on\
-		 peut ressentir une relaxation profonde, une distorsion du temps, ou une concentration très spécifique.")
-st.header("Tâche expérimentale")
+st.write("L’état de transe hypnotique est un état modifié de conscience caractérisé par :")
+st.write("    - une focalisation intense sur une idée ou une sensation")
+st.write("    - une diminution de la perception de l’environnement extérieur")
+st.write("    - une ouverture accrue aux suggestions.")
+st.write("Ce n’est pas une perte de contrôle ou de conscience, mais un état dans lequel on peut ressentir une relaxation profonde, \
+         une distorsion du temps, ou une concentration très spécifique.")
+st.header("Consigne")
 st.write(
-	"""Le but de cette tâche est que vous évaluez dans quelle mesure chaque enregistrement facilite l’accès à
-l’état de transe hypnotique, en utilisant l’échelle proposée.""")
+	"""Vous allez écouter successivement des enregistrements de maximum 1 minute. Nous ne vous demandons pas de vous focaliser sur le contenu (le sens des mots et / ou des phrases)
+        mais bien sur la façon dont est délivré ce contenu (la voix, la parole). Sur une échelle de 1 à 10, vous indiquerez dans quelle mesure l'enregistrement est susceptible 
+        d'induire un état de transe.""")
 
 st.header("Qualité d'écoute")
 st.write(""" Avant de commencer l'écoute, veuillez vérifier que votre volume est réglé de manière confortable sur vos
@@ -53,4 +56,4 @@ Cliquez ici pour écouter le test audio.""")
 
 st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
 
-result = st.slider("Sur une échelle de 0 à 10, à quel point considérez-vous cette voix comme hypnotique ?", min_value=0, max_value=10, key="hypnotique", step = 1, )
+result = st.slider("Sur une échelle de 1 à 10, dans quelle mesure cet enregistrement est-il susceptible d'induire l'état de transe hypnotique ?", min_value=0, max_value=10, key="hypnotique", step = 1, )

@@ -69,6 +69,8 @@ data["experience_hypnotherapie_patient"] = experience_hypnotherapie_patient
 if experience_hypnotherapie_patient == "J'ai déjà participé à une ou des séance(s) d'hypnothérapie":
     data["nombre_seances"] = st.number_input(
         "Si vous en avez déjà réalisé des séances, combien en avez-vous eu ?", min_value=0, step=1, value=default_nombre_seances, key="nombre_seances")
+else:
+    data["nombre_seances"] = 0
 
 connaissance_relaxation = st.radio(
     "Avez-vous des connaissances ou une expérience particulière dans d'autres techniques de relaxation ou de méditation ?",
@@ -80,17 +82,9 @@ data["connaissance_relaxation"] = connaissance_relaxation
 
 if connaissance_relaxation == "Oui":
     data["details_relaxation"] = st.text_input("Si oui, pourriez-vous préciser ?", value=default_details_relaxation, key="details_relaxation")
+else:
+    data["details_relaxation"] = ""
 
-experience_transe = st.radio(
-    "Avez-vous déjà eu des expériences personnelles liées à la transe hypnotique (détente profonde, altération de la perception du temps, etc.) ?",
-    ["Oui", "Non"],
-    index=["Oui", "Non"].index(default_experience_transe) if default_experience_transe is not None else None,
-    key="experience_transe"
-)
-data["experience_transe"] = experience_transe
-
-if experience_transe == "Oui":
-    data["details_transe"] = st.text_area("Si oui, pouvez-vous brièvement décrire cette expérience ?", value=default_details_transe, key="details_transe")
 
 st.session_state["data"] = data
 # Submit button

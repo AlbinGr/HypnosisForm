@@ -55,13 +55,13 @@ data["genre"] = st.selectbox(
 )
 
 data["langue_maternelle"] = st.text_input(
-    "Quel est votre langue maternelle ?", 
+    "Quelle est votre langue maternelle ? ", 
     key="langue_maternelle", 
     value=data.get("langue_maternelle", None)
 )
 
 data["parlez_autres_langues"] = st.radio(
-    "Parlez-vous d'autres langues ?", 
+    "Parlez-vous d’autres langues ?", 
     ["Oui", "Non"], 
     key="parlez_autres_langues", 
     index=["Oui", "Non"].index(data.get("parlez_autres_langues", None)) if data.get("parlez_autres_langues", None) is not None else None
@@ -70,19 +70,19 @@ if data["parlez_autres_langues"] == "Oui":
     data["autres_langues"] = st.text_input(
         "Si oui, lesquelles ?", 
         key="autres_langues", 
-        value=data.get("autres_langues", None)
+        value=data.get("autres_langues", "")
     )
 
 st.subheader("Temps d'écoute de la musique")
 data["temps_actif"] = st.number_input(
-    "En moyenne, combien de temps par jour passez-vous à écouter de la musique de manière active (en minutes) ?", 
+    "En moyenne, combien de temps par jour passez-vous à écouter de la musique de manière active (par exemple, en prêtant attention à un concert ou à une playlist) ?", 
     min_value=0, 
     step=1, 
     key="temps_actif", 
     value=data.get("temps_actif", None)
 )
 data["temps_passif"] = st.number_input(
-    "En moyenne, combien de temps par jour passez-vous à écouter de la musique de manière passive (en minutes) ?", 
+    "En moyenne, combien de temps par jour passez-vous à écouter de la musique de manière passive (par exemple, lorsque la musique joue en arrière-plan comme à la radio ou dans une autre pièce) ? ", 
     min_value=0, 
     step=1, 
     key="temps_passif", 
@@ -91,10 +91,18 @@ data["temps_passif"] = st.number_input(
 
 data["pratique_musique"] = st.selectbox(
     "Pratiquez-vous actuellement un instrument de musique et/ou du chant ?", 
-    ["Selection", "Oui, régulièrement", "Oui mais occasionnellement", "Non"], 
+    ["Selection", "Oui", "Non"], 
     key="pratique_musique",
-    index=["Selection", "Oui, régulièrement", "Oui mais occasionnellement", "Non"].index(data.get("pratique_musique", "Selection")) 
+    index=["Selection", "Oui", "Non"].index(data.get("pratique_musique", "Selection")) 
 )
+if data["pratique_musique"] == "Oui":
+    data["instrument_pratiqué"] = st.number_input(
+        "Si oui, indiquez le nombre d’heure par semaine de votre pratique", 
+        key="instrument_pratiqué", 
+        min_value=0,
+        max_value = 7*24,
+        value=data.get("instrument_pratiqué", 0)
+    )
 
 data["problèmes_auditifs"] = st.radio(
     "Avez-vous déjà présenté des problèmes auditifs ?", 
@@ -106,7 +114,7 @@ if data["problèmes_auditifs"] == "Oui":
     data["détails_problèmes_auditifs"] = st.text_input(
         "Si oui, lesquels ?", 
         key="détails_problèmes_auditifs", 
-        value=data.get("détails_problèmes_auditifs", None)
+        value=data.get("détails_problèmes_auditifs", "")
     )
 
 hypnose_patient = st.radio(
@@ -134,7 +142,7 @@ if hypnose_praticien == "Oui":
     data["fréquence_hypnose_praticien"] = st.text_input(
         "Si oui, à quelle fréquence ?", 
         key="fréquence_hypnose_praticien", 
-        value=data.get("fréquence_hypnose_praticien", None)
+        value=data.get("fréquence_hypnose_praticien", "")
     )
 
 st.session_state["data"] = data

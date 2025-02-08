@@ -45,13 +45,13 @@ data["somnambulisme_adulte"] = st.radio(
 )
 
 data["aisance_expression_sentiments"] = st.radio(
-    "À l’adolescence, vous sentiez-vous à l’aise pour exprimer vos sentiments à l’un ou l’autre de vos figures maternelles ou paternelles ?", ["Oui", "Non"], 
+    "A l’adolescence, vous sentiez-vous à l’aise pour exprimer vos sentiments à l’une ou l’autre de vos figures parentales ?", ["Oui", "Non"], 
     index= ["Oui", "Non"].index(data.get("aisance_expression_sentiments", None)) if data.get("aisance_expression_sentiments", None) is not None else None,
     key="aisance_expression_sentiments"
 )
 
 data["contact_visuel_proche"] = st.radio(
-    "Avez-vous tendance à regarder directement les personnes dans les yeux et/ou vous approcher d’eux lorsque vous discutez d’un sujet intéressant ?", ["Oui", "Non"],
+    "Avez-vous tendance à regarder directement les personnes dans les yeux et/ou vous approcher d’elles lorsque vous discutez d’un sujet intéressant ?", ["Oui", "Non"],
     index= ["Oui", "Non"].index(data.get("contact_visuel_proche", None)) if data.get("contact_visuel_proche", None) is not None else None,
     key="contact_visuel_proche"
 )
@@ -63,7 +63,7 @@ data["perception_autrui_critique"] = st.radio(
 )
 
 data["aisance_conversation_groupe"] = st.radio(
-    "Dans un groupe avec des personnes que vous venez de rencontrer, vous sentiriez-vous à l’aise d’attirer l’attention sur vous en lançant la conversation ?", ["Oui", "Non"],
+    "Dans un groupe avec des personnes que vous venez de rencontrer, vous sentez-vous à l’aise d’attirer l’attention sur vous en lançant la conversation ?", ["Oui", "Non"],
     index= ["Oui", "Non"].index(data.get("aisance_conversation_groupe", None)) if data.get("aisance_conversation_groupe", None) is not None else None,
     key="aisance_conversation_groupe"
 )
@@ -76,7 +76,7 @@ data["affection_publique"] = st.radio(
 )
 
 data["empathie_chaleur_physique"] = st.radio(
-    "Quand quelqu’un parle de se sentir au chaud physiquement, commencez-vous également à ressentir de la chaleur ?", ["Oui", "Non"], 
+    "Quand quelqu'un parle de se sentir au chaud physiquement, commencez-vous également à ressentir de la chaleur ?", ["Oui", "Non"], 
     index= ["Oui", "Non"].index(data.get("empathie_chaleur_physique", None)) if data.get("empathie_chaleur_physique", None) is not None else None,
     key="empathie_chaleur_physique"
 )
@@ -89,19 +89,19 @@ data["ecoute_attention"] = st.radio(
 )
 
 data["apprentissage_visuel"] = st.radio(
-    "Avez-vous l’impression que vous apprenez et comprenez mieux en voyant et/ou en lisant par rapport à lorsque vous l’entendez ?", ["Oui", "Non"], 
+    "Avez-vous l’impression que vous apprenez et comprenez mieux en voyant et/ou en lisant que lorsque vous entendez l'information ?", ["Oui", "Non"], 
     index= ["Oui", "Non"].index(data.get("apprentissage_visuel", None)) if data.get("apprentissage_visuel", None) is not None else None,
     key="apprentissage_visuel"
 )
 
 data["aisance_questions_public"] = st.radio(
-    "Lors d’un nouveau cours ou conférence, vous sentez-vous généralement à l’aise de poser des questions devant le groupe ?", ["Oui", "Non"],
+    "Lors d’un nouveau cours ou de conférences, vous sentez-vous généralement à l’aise de poser des questions devant le groupe ?", ["Oui", "Non"],
     index= ["Oui", "Non"].index(data.get("aisance_questions_public", None)) if data.get("aisance_questions_public", None) is not None else None,
     key="aisance_questions_public"
 )
 
 data["importance_details_expression"] = st.radio(
-    "Lorsque vous exprimez vos idées, trouvez-vous important de présenter tous les détails afin que l’autre personne puisse bien comprendre complètement ?", ["Oui", "Non"],
+    "Lorsque vous exprimez vos idées, trouvez-vous important de présenter tous les détails afin que l'autre personne puisse comprendre complètement ?", ["Oui", "Non"],
     index= ["Oui", "Non"].index(data.get("importance_details_expression", None)) if data.get("importance_details_expression", None) is not None else None,
     key="importance_details_expression"
 )
@@ -120,7 +120,7 @@ data["aisance_mouvements_public"] = st.radio(
 )
 
 data["lecture_fiction_preference"] = st.radio(
-    "Préférez-vous lire de la fiction plutôt que des ouvrages non fictifs ?", ["Oui", "Non"], 
+    "Préférez-vous lire de la fiction plutôt que des ouvrages non fictifs ? ", ["Oui", "Non"], 
     index= ["Oui", "Non"].index(data.get("lecture_fiction_preference", None)) if data.get("lecture_fiction_preference", None) is not None else None,
     key="lecture_fiction_preference"
 )
