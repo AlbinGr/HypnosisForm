@@ -172,7 +172,5 @@ with col1:
     if st.button("Retour"):
         if data["hypnose_praticien"] == "Oui":
             st.switch_page("pages/hypnose_expert.py")
-        elif data["hypnose_patient"] == "Oui":
-            st.switch_page("pages/hypnose_patient.py")
         else:
-            st.switch_page("pages/formulaire_sd.py")
+            st.switch_page("pages/hypnose_patient.py")

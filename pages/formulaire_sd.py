@@ -117,33 +117,45 @@ if data["problèmes_auditifs"] == "Oui":
         value=data.get("détails_problèmes_auditifs", "")
     )
 
-hypnose_patient = st.radio(
-    "Êtes-vous familier à l’hypnose en tant que patient ou sujet ?", 
+st.write(data.get("hypnose_familiarity", None))
+st.write(["Oui", "Non"].index(data.get("hypnose_familiarity", None)) if data.get("hypnose_familiarity", None) is not None else None)
+hypnose_familiarity = st.radio("Êtes-vous familier avec l’hypnose ?", 
     ["Oui", "Non"], 
-    key="hypnose_patient", 
-    index=["Oui", "Non"].index(data.get("hypnose_patient", None)) if data.get("hypnose_patient", None) is not None else None
+    key="hypnose_familiarity", 
+    index=["Oui", "Non"].index(data.get("hypnose_familiarity", None)) if data.get("hypnose_familiarity", None) is not None else None
 )
-data["hypnose_patient"] = hypnose_patient
-if hypnose_patient == "Oui":
-    data["fréquence_hypnose_patient"] = st.text_input(
-        "Si oui, à quelle fréquence ?", 
-        key="fréquence_hypnose_patient", 
-        value=data.get("fréquence_hypnose_patient", None)
+data["hypnose_familiarity"] = hypnose_familiarity
+if hypnose_familiarity == "Oui":
+    hypnose_patient = st.radio(
+        "Êtes-vous familier à l’hypnose en tant que patient ou sujet ?", 
+        ["Oui", "Non"], 
+        key="hypnose_patient", 
+        index=["Oui", "Non"].index(data.get("hypnose_patient", None)) if data.get("hypnose_patient", None) is not None else None
     )
+    data["hypnose_patient"] = hypnose_patient
+    if hypnose_patient == "Oui":
+        data["fréquence_hypnose_patient"] = st.text_input(
+            "Si oui, à quelle fréquence ?", 
+            key="fréquence_hypnose_patient", 
+            value=data.get("fréquence_hypnose_patient", None)
+        )
 
-hypnose_praticien = st.radio(
-    "Êtes-vous familier à l’hypnose en tant que praticien ou thérapeute ?", 
-    ["Oui", "Non"], 
-    key="hypnose_praticien", 
-    index=["Oui", "Non"].index(data.get("hypnose_praticien", None)) if data.get("hypnose_praticien", None) is not None else None
-)
-data["hypnose_praticien"] = hypnose_praticien
-if hypnose_praticien == "Oui":
-    data["fréquence_hypnose_praticien"] = st.text_input(
-        "Si oui, à quelle fréquence ?", 
-        key="fréquence_hypnose_praticien", 
-        value=data.get("fréquence_hypnose_praticien", "")
+    hypnose_praticien = st.radio(
+        "Êtes-vous familier à l’hypnose en tant que praticien ou thérapeute ?", 
+        ["Oui", "Non"], 
+        key="hypnose_praticien", 
+        index=["Oui", "Non"].index(data.get("hypnose_praticien", None)) if data.get("hypnose_praticien", None) is not None else None
     )
+    data["hypnose_praticien"] = hypnose_praticien
+    if hypnose_praticien == "Oui":
+        data["fréquence_hypnose_praticien"] = st.text_input(
+            "Si oui, à quelle fréquence ?", 
+            key="fréquence_hypnose_praticien", 
+            value=data.get("fréquence_hypnose_praticien", "")
+        )
+else: 
+    data["hypnose_patient"] = "Non"
+    data["hypnose_praticien"] = "Non"
 
 st.session_state["data"] = data
 
