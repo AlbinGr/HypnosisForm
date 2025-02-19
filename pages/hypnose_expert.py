@@ -39,7 +39,7 @@ elif data["hypnose_praticien"] == "Non":
     st.switch_page("pages/kappa1.py")
 
 # Form fields
-st.title("Formulaire SD expert")
+st.title("Formulaire hypnothérapeute")
 
 data["experience_hypnotherapie_expert"] = st.text_input(
     "Depuis combien de temps pratiquez-vous l'hypnothérapie ?",

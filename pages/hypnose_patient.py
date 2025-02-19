@@ -41,7 +41,7 @@ elif data["hypnose_praticien"] == "Oui":
     st.switch_page("pages/hypnose_expert.py")
 
 # Form fields
-st.title("Formulaire SD patient")
+st.title("Formulaire personne tout-venant")
 
 # Set default values if available
 default_accord_hypnose_fiable = data.get("accord_hypnose_fiable", None)
