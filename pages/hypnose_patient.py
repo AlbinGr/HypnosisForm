@@ -35,6 +35,10 @@ else:
 	
 if "hypnose_patient" not in data.keys():
     st.switch_page("pages/formulaire_sd.py")
+if "hypnose_praticien" not in data.keys():
+    st.switch_page("pages/formulaire_sd.py")
+elif data["hypnose_praticien"] == "Oui":
+    st.switch_page("pages/hypnose_expert.py")
 
 # Form fields
 st.title("Formulaire SD patient")
