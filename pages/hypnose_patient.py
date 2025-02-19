@@ -35,13 +35,9 @@ else:
 	
 if "hypnose_patient" not in data.keys():
     st.switch_page("pages/formulaire_sd.py")
-if "hypnose_praticien" not in data.keys():
-    st.switch_page("pages/formulaire_sd.py")
-elif data["hypnose_praticien"] == "Oui":
-    st.switch_page("pages/hypnose_expert.py")
 
 # Form fields
-st.title("Formulaire personne tout-venant")
+st.title("Formulaire SD patient")
 
 # Set default values if available
 default_accord_hypnose_fiable = data.get("accord_hypnose_fiable", None)
