@@ -2,13 +2,9 @@ import streamlit as st
 from webdav import WebDAVClient
 import hashlib
 from time import sleep
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import random
 
 def login(button_name="Login", target_page = "app.py"):
-	email = st.text_input("Email")
+	email = st.text_input("Pseudo")
 	password = st.text_input("Password", type="password")
 
 	hashed_email = hashlib.sha256(email.encode()).hexdigest()

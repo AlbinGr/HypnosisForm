@@ -75,14 +75,14 @@ if data["parlez_autres_langues"] == "Oui":
 
 st.subheader("Temps d'écoute de la musique")
 data["temps_actif"] = st.number_input(
-    "En moyenne, combien de temps par jour passez-vous à écouter de la musique de manière active (par exemple, en prêtant attention à un concert ou à une playlist) ?", 
+    "En moyenne, combien de minutes par jour passez-vous à écouter de la musique de manière active (par exemple, en prêtant attention à un concert ou à une playlist) ?", 
     min_value=0, 
     step=1, 
     key="temps_actif", 
     value=data.get("temps_actif", None)
 )
 data["temps_passif"] = st.number_input(
-    "En moyenne, combien de temps par jour passez-vous à écouter de la musique de manière passive (par exemple, lorsque la musique joue en arrière-plan comme à la radio ou dans une autre pièce) ? ", 
+    "En moyenne, combien de minutes par jour passez-vous à écouter de la musique de manière passive (par exemple, lorsque la musique joue en arrière-plan comme à la radio ou dans une autre pièce) ? ", 
     min_value=0, 
     step=1, 
     key="temps_passif", 
@@ -97,7 +97,7 @@ data["pratique_musique"] = st.selectbox(
 )
 if data["pratique_musique"] == "Oui":
     data["instrument_pratiqué"] = st.number_input(
-        "Si oui, indiquez le nombre d’heure par semaine de votre pratique", 
+        "Si oui, quelle est votre durée moyenne de pratique par semaine (en minutes)?", 
         key="instrument_pratiqué", 
         min_value=0,
         max_value = 7*24,
@@ -135,7 +135,7 @@ if hypnose_familiarity == "Oui":
     data["hypnose_patient"] = hypnose_patient
     if hypnose_patient == "Oui":
         data["fréquence_hypnose_patient"] = st.text_input(
-            "Si oui, à quelle fréquence ?", 
+            "Si oui, combien de séances d'hypnose avez-vous réalisées en tant que patient/sujet ?", 
             key="fréquence_hypnose_patient", 
             value=data.get("fréquence_hypnose_patient", None)
         )

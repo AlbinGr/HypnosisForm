@@ -36,7 +36,7 @@ else:
 if "hypnose_praticien" not in data.keys():
     st.switch_page("pages/formulaire_sd.py")
 elif data["hypnose_praticien"] == "Non":
-    st.switch_page("pages/kappa1.py")
+    st.switch_page("pages/audiopage.py")
 
 # Form fields
 st.title("Formulaire SD expert")
@@ -96,7 +96,7 @@ with col2:
                 break
         if not error:
             st.session_state["client"].put_json(st.secrets["webdav"]["remote_path"] + f"{st.session_state['current_user']}.json" , data)
-            st.switch_page("pages/kappa1.py")
+            st.switch_page("pages/audiopage.py")
 
 with col1:
     if st.button("Retour"):

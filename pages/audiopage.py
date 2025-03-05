@@ -17,7 +17,7 @@ else:
 if "current_user" not in st.session_state.keys() or st.session_state["current_user"] is None:
     col1, col2 = st.columns(2, vertical_alignment="bottom")
     with col1:
-        login("Login", "pages/kappa2.py")
+        login("Login", "pages/audiopage.py")
     with col2:
         if st.button("Return to homepage"):
             st.switch_page("app.py")
@@ -49,11 +49,9 @@ st.write(
         d'induire un état de transe.""")
 
 st.header("Qualité d'écoute")
-st.write(""" Avant de commencer l'écoute, veuillez vérifier que votre volume est réglé de manière confortable sur vos
-appareils (téléphone, tablette, ordinateur) pour que vous puissiez entendre clairement, sans gêne. Si le son
-est trop faible ou trop fort, ajustez le volume en conséquence, en gardant une intensité agréable. Pour cela :
-Cliquez ici pour écouter le test audio.""")
+st.write(""" Avant de commencer l'expérience, veuillez vous munir d'une casque ou d'écouteurs. Vérifiez que le volume est réglé de manière confortable sur votre appareil (téléphone, tablette, ordinateur) de sorte que vous puissiez entendre clairement, sans gêne. Si le son est trop faible ou trop fort, ajustez le volume en conséquence, en gardant une intensité agréable. Une fois le volume réglé, veillez à ne pas le modifier tout au long de l'expérience. Pour tester le volume de votre appareil, cliquez ici :""")
 
-st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
+if st.button("Commencer l'évaluation"):
+    st.switch_page("pages/evalpage.py")
+# TODO Make this page better (with return etc...)
 
-result = st.slider("Sur une échelle de 1 à 10, dans quelle mesure cet enregistrement est-il susceptible d'induire l'état de transe hypnotique ?", min_value=0, max_value=10, key="hypnotique", step = 1, )
