@@ -117,8 +117,6 @@ if data["problèmes_auditifs"] == "Oui":
         value=data.get("détails_problèmes_auditifs", "")
     )
 
-st.write(data.get("hypnose_familiarity", None))
-st.write(["Oui", "Non"].index(data.get("hypnose_familiarity", None)) if data.get("hypnose_familiarity", None) is not None else None)
 hypnose_familiarity = st.radio("Êtes-vous familier avec l’hypnose ?", 
     ["Oui", "Non"], 
     key="hypnose_familiarity", 

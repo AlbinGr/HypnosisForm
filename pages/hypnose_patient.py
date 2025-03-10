@@ -55,21 +55,9 @@ data["accord_hypnose_fiable"] = st.slider(
 data["accord_hypnose_impact"] = st.slider(
     "À quel point êtes-vous d’accord avec l’affirmation suivante : Je crois que l’hypnose peut avoir un impact positif sur moi. 1 = pas du tout d'accord ; 5 = tout à fait d'accord", 1, 5, default_accord_hypnose_impact, key="accord_hypnose_impact")
 
-"""experience_hypnotherapie_patient = st.radio(
-    "Quelle est votre expérience en hypnothérapie ?",
-    ["Je n'ai jamais réalisé de séance d'hypnothérapie", "J'ai déjà participé à une ou des séance(s) d'hypnothérapie"],
-    index=["Je n'ai jamais réalisé de séance d'hypnothérapie", "J'ai déjà participé à une ou des séance(s) d'hypnothérapie"].index(default_experience_hypnotherapie_patient)\
-		if default_experience_hypnotherapie_patient is not None else None,
-    key="experience_hypnotherapie_patient"
-)
-data["experience_hypnotherapie_patient"] = experience_hypnotherapie_patient """
+
 data["experience_hypnotherapie_patient"] = "NA"
 
-"""if experience_hypnotherapie_patient == "J'ai déjà participé à une ou des séance(s) d'hypnothérapie":
-    data["nombre_seances"] = st.number_input(
-        "Si vous en avez déjà réalisé des séances, combien en avez-vous eu ?", min_value=0, step=1, value=default_nombre_seances, key="nombre_seances")
-else:
-    data["nombre_seances"] = 0"""
 data["nombre_seances"] = 0
 
 connaissance_relaxation = st.radio(

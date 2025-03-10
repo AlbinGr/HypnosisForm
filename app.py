@@ -35,8 +35,6 @@ L’ULB se conforme au Règlement général sur la protection des données (RGPD
 """)
     st.markdown("### Qui a examiné cette étude ?")
     st.write("""
-Faculté de Psychologie, des Sciences de l'Education et de Logopédie, Université Libre de Bruxelles
-NE PAS MODIFIER -- Consentement éclairé enquête/tâche anonyme version 13 février 2025, Page 2 sur 3
 Cette étude a été évaluée par un Comité d'Ethique indépendant, à savoir le Comité d'Avis Ethique de la Faculté de Psychologie, des Sciences de l'Education et de Logopédie. En aucun cas vous ne devez prendre l'avis favorable du Comité d'Avis Ethique comme une incitation à participer à cette étude.
 """)
 
@@ -54,10 +52,14 @@ st.markdown("""
 
 understood = st.checkbox("J'ai lu et compris", value=False)
 
-
+if "data" in st.session_state.keys():
+    del st.session_state.data
+if "client" in st.session_state.keys():
+    del st.session_state.client
 if understood:
     col1, col2 = st.columns(2, vertical_alignment="bottom")
     with col1:
+        del st.session_state.data
         login("Login", "pages/formulaire_sd.py")
     with col2:
         if "current_user" in st.session_state.keys() and st.session_state["current_user"] is not None:
