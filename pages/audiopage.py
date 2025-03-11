@@ -45,7 +45,7 @@ st.write("Ce n’est pas une perte de contrôle ou de conscience, mais un état 
 st.header("Consigne")
 st.write(
 	"""Vous allez écouter successivement des enregistrements de maximum 1 minute. Nous ne vous demandons pas de vous focaliser sur le contenu (le sens des mots et / ou des phrases)
-        mais bien sur la façon dont est délivré ce contenu (la voix, la parole). Sur une échelle de 1 à 10, vous indiquerez dans quelle mesure l'enregistrement est susceptible 
+        mais bien sur la façon dont est délivré ce contenu (la voix, la parole). Sur une échelle de 1 (pas du tout) à 10 (tout à fait), vous indiquerez dans quelle mesure l'enregistrement est susceptible 
         d'induire un état de transe.""")
 
 st.header("Qualité d'écoute")

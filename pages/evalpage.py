@@ -63,13 +63,12 @@ if "audio_list" not in data.keys() or data["audio_list"] is None:
     st.session_state["data"] = data
 
 
-
-st.title("Évaluation d'écoute") 
-
 if "current_audio_path" not in st.session_state.keys():
     st.session_state["current_audio_path"] = st.session_state["data"]["audio_list"][0] if len(st.session_state["data"]["audio_list"]) > 0 else None
 if "current_audio" not in st.session_state.keys():
     st.session_state["current_audio"] = client.get_audio(st.session_state["current_audio_path"]) if st.session_state["current_audio_path"] is not None else None
+
+st.write(f"Il vous reste {len(st.session_state['data']['audio_list'])} enregistrements à évaluer.")
 
 if st.session_state["current_audio"] is not None:
     st.audio(st.session_state["current_audio"][0], autoplay=True, sample_rate=st.session_state["current_audio"][1]) 
@@ -77,7 +76,7 @@ else:
     st.switch_page("pages/lastpage.py")
 
 
-result = st.slider("Sur une échelle de 1 à 10, dans quelle mesure cet enregistrement est-il susceptible d'induire l'état de transe hypnotique ?", min_value=0, max_value=10, key="hypnotique", step = 1, value = None)
+result = st.slider("Dans quelle mesure cet enregistrement est-il susceptible d'induire l'état de transe hypnotique, sur une échelle de 1 (pas du tout) à 10 (tout à fait) ?", min_value=1, max_value=10, key="hypnotique", step = 1, value = None)
 
 
 if st.button("Suivant"):

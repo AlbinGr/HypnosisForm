@@ -36,7 +36,7 @@ else:
 
 
 
-st.title("Questionnaire socio-démographique")
+st.title("Informations générales")
 
 data["age"] = st.number_input(
     "Quel est votre âge ?", 
@@ -139,7 +139,7 @@ if hypnose_familiarity == "Oui":
         )
 
     hypnose_praticien = st.radio(
-        "Êtes-vous familier à l’hypnose en tant que praticien ou thérapeute ?", 
+        "Êtes-vous ou avez-vous été hypnothérapeute dans le domaine (para)médical (ex. psychothérapie, anesthésiologie, etc) ?", 
         ["Oui", "Non"], 
         key="hypnose_praticien", 
         index=["Oui", "Non"].index(data.get("hypnose_praticien", None)) if data.get("hypnose_praticien", None) is not None else None
@@ -147,7 +147,7 @@ if hypnose_familiarity == "Oui":
     data["hypnose_praticien"] = hypnose_praticien
     if hypnose_praticien == "Oui":
         data["fréquence_hypnose_praticien"] = st.text_input(
-            "Si oui, à quelle fréquence ?", 
+            "Si oui, à quelle fréquence et pendant combien de temps (ex. tous les jours pendant 5 ans) ?", 
             key="fréquence_hypnose_praticien", 
             value=data.get("fréquence_hypnose_praticien", "")
         )

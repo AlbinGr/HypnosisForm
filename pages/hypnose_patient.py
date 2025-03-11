@@ -37,7 +37,6 @@ if "hypnose_patient" not in data.keys():
     st.switch_page("pages/formulaire_sd.py")
 
 # Form fields
-st.title("Formulaire SD patient")
 
 # Set default values if available
 default_accord_hypnose_fiable = data.get("accord_hypnose_fiable", None)
@@ -69,9 +68,11 @@ connaissance_relaxation = st.radio(
 data["connaissance_relaxation"] = connaissance_relaxation
 
 if connaissance_relaxation == "Oui":
-    data["details_relaxation"] = st.text_input("Si oui, pourriez-vous préciser ?", value=default_details_relaxation, key="details_relaxation")
+    data["details_relaxation_tech"] = st.text_input("Si oui, précisez le(s) type(s) de technique(s):", value=default_details_relaxation, key="details_relaxation_tech")
+    data["details_relaxation_freq"] = st.text_input("Si oui, précisez à quelle fréquence:", value=default_details_relaxation, key="details_relaxation_freq")
 else:
-    data["details_relaxation"] = ""
+    data["details_relaxation_tech"] = ""
+    data["details_relaxation_freq"] = ""
 
 
 st.session_state["data"] = data

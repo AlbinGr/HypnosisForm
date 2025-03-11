@@ -59,7 +59,7 @@ if "client" in st.session_state.keys():
 if understood:
     col1, col2 = st.columns(2, vertical_alignment="bottom")
     with col1:
-        del st.session_state.data
+        st.session_state.data = None
         login("Login", "pages/formulaire_sd.py")
     with col2:
         if "current_user" in st.session_state.keys() and st.session_state["current_user"] is not None:

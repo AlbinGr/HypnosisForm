@@ -39,16 +39,16 @@ elif data["hypnose_praticien"] == "Non":
     st.switch_page("pages/audiopage.py")
 
 # Form fields
-st.title("Formulaire SD expert")
+st.title("En tant qu'hypnothérapeute:")
 
 data["experience_hypnotherapie_expert"] = st.text_input(
-    "Depuis combien de temps pratiquez-vous l'hypnothérapie ?",
+    "Depuis combien de temps pratiquez-vous l'hypnose en tant qu'hypnothérapeute ?",
     key="experience_hypnotherapie_expert_expert",
     value = data.get("experience_hypnotherapie_expert", None)
 )
 
-data["diplome_principal"] = st.text_input(
-    "Quel est votre diplôme principal dans le domaine médical ou paramédical ?",
+data["diplome_principal"] = st.text_input("Dans le cadre de quelle pratique (para)médicale pratiquez-vous l'hypnothérapie (ex. psychothérapie, anesthésie) ?",
+    # "Quel est votre diplôme principal dans le domaine médical ou paramédical ?",
     key="diplome_principal", 
     value = data.get("diplome_principal", None)
 )
@@ -62,24 +62,13 @@ formation_hypnose = st.radio(
 data["formation_hypnose"] = formation_hypnose
 if formation_hypnose == "Oui":
     data["details_formation_hypnose"] = st.text_input(
-        "Si oui, quel est l’intitulé de cette formation/certification ? En quelle année avez-vous été diplômé/certifié ?",
+        "Si oui, indiquez l’intitulé de cette formation/certification ainsi que l'année d'obtention ?",
         key="details_formation_hypnose", 
         value = data.get("details_formation_hypnose", None)
     )
 
-connaissance_relaxation = st.radio(
-    "Avez-vous des connaissances ou une expérience particulière dans d'autres techniques de relaxation ou de méditation ?",
-    ["Oui", "Non"],
-    index=["Oui", "Non"].index(data.get("connaissance_relaxation", None) if data.get("connaissance_relaxation", None) is not None else None),
-    key="connaissance_relaxation"
-)
-data["connaissance_relaxation"] = connaissance_relaxation
-if connaissance_relaxation == "Oui":
-    data["details_relaxation"] = st.text_input(
-        "Si oui, pourriez-vous préciser ?",
-        value=data.get("details_relaxation", ""),
-        key="details_relaxation"
-    )
+
+
 
 st.session_state["data"] = data
 
