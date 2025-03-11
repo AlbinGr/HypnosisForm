@@ -1,7 +1,9 @@
+import datetime
 import streamlit as st
 from webdav import WebDAVClient
 from authentification import login, logout
 import numpy as np
+import copy
 
 if "client" not in st.session_state.keys():
     client = WebDAVClient(
@@ -43,11 +45,10 @@ def create_list(client):
     # 20 % retest
     retake_list = np.random.choice(file_list, int(0.2*len(file_list)), replace = False)
     file_list.extend(retake_list)
-    
     # Save the list to the server
     client.put_json(st.secrets["webdav"]["base_path"] + f"{h}.json", {"audio_list": file_list, "results": []})
 
-    return list(retake_list) 
+    return list(file_list) 
 
 
 if "data" not in st.session_state.keys() or st.session_state["data"] is None:
@@ -63,6 +64,7 @@ if "audio_list" not in data.keys() or data["audio_list"] is None:
     st.session_state["data"] = data
 
 
+
 if "current_audio_path" not in st.session_state.keys():
     st.session_state["current_audio_path"] = st.session_state["data"]["audio_list"][0] if len(st.session_state["data"]["audio_list"]) > 0 else None
 if "current_audio" not in st.session_state.keys():
@@ -75,13 +77,14 @@ if st.session_state["current_audio"] is not None:
 else:
     st.switch_page("pages/lastpage.py")
 
-
-result = st.slider("Dans quelle mesure cet enregistrement est-il susceptible d'induire l'état de transe hypnotique, sur une échelle de 1 (pas du tout) à 10 (tout à fait) ?", min_value=1, max_value=10, key="hypnotique", step = 1, value = None)
+options = ["Pas du tout d'accord", "Plutôt pas d'accord", "Neutre", "Plutôt d'accord", "Tout à fait d'accord"]
+result = st.select_slider("Dans quelle mesure cet enregistrement est-il susceptible d'induire l'état de transe hypnotique ?",\
+                          options= options, key="hypnotique", value = None)
 
 
 if st.button("Suivant"):
     # Save the result in the data
-    st.session_state["data"]["results"].append([st.session_state["current_audio_path"], result])
+    st.session_state["data"]["results"].append([st.session_state["current_audio_path"], result, datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
     # Remove the current audio from the list
     st.session_state["data"]["audio_list"] = list(st.session_state["data"]["audio_list"][1:])
     # Save the data to server
@@ -94,4 +97,3 @@ if st.button("Suivant"):
         st.switch_page("pages/evalpage.py")
     else:
         st.switch_page("pages/lastpage.py")
-# TODO Make this page better (with return etc...)

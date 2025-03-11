@@ -3,9 +3,9 @@ from webdav import WebDAVClient
 import hashlib
 from time import sleep
 
-def login(button_name="Login", target_page = "app.py"):
-	email = st.text_input("Pseudo")
-	password = st.text_input("Password", type="password")
+def login(button_name="Se connecter", target_page = "app.py"):
+	email = st.text_input("Nom d'utilisateur")
+	password = st.text_input("Mot de passe", type="password")
 
 	hashed_email = hashlib.sha256(email.encode()).hexdigest()
 	hashed_password = hashlib.sha256(password.encode()).hexdigest()
@@ -36,17 +36,17 @@ def login(button_name="Login", target_page = "app.py"):
 			st.error("Invalid email or password")
 			sleep(2)
 
-def register(button_name="Register", target_page = "app.py"):
-	email = st.text_input("Email")
-	password = st.text_input("Password", type="password")
-	confirmpassword = st.text_input("Confirm Password", type="password")
+def register(button_name="S'enregistrer", target_page = "app.py"):
+	email = st.text_input("Nom d'utilisateur")
+	password = st.text_input("Mot de passe", type="password")
+	confirmpassword = st.text_input("Confirmez le mot de passe", type="password")
 
 	hashed_email = hashlib.sha256(email.encode()).hexdigest()
 	hashed_password = hashlib.sha256(password.encode()).hexdigest()	
 	hashed_confirmpassword = hashlib.sha256(confirmpassword.encode()).hexdigest()
 
 	if hashed_password != hashed_confirmpassword:
-		st.error("Passwords do not match")
+		st.error("Les mots de passe ne correspondent pas")
 		st.stop()
 
 	if "client" not in st.session_state.keys():
@@ -63,17 +63,17 @@ def register(button_name="Register", target_page = "app.py"):
 		# Add your registration logic here
 		# Check if the user exists and if the password matches
 		if client.file_exists(st.secrets["webdav"]["remote_path"] + f"{hashed_email}.json"):
-			st.error("User already exists")
+			st.error("Utilisateur déjà existant")
 			sleep(2)
 		else:
 			client.put_json(st.secrets["webdav"]["remote_path"] + f"{hashed_email}.json", {"password": hashed_password})
 			st.session_state.current_user = hashed_email
 			st.switch_page(target_page)
 
-def logout(button_name="Logout", target_page = "app.py"):
+def logout(button_name="Déconnection", target_page = "app.py"):
 	if st.button(button_name):
 		st.session_state.current_user = None
 		st.switch_page(target_page)
 
-# TODO Reset password?
+
 

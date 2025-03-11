@@ -56,7 +56,10 @@ if "data" in st.session_state.keys():
     del st.session_state.data
 if "client" in st.session_state.keys():
     del st.session_state.client
+
 if understood:
+
+    st.write("Avant de débuter l’expérience, veuillez créer un identifiant personnel et un mot de passe. Ces informations vous permettront de vous reconnecter et de reprendre l’expérience là où vous l’avez laissée en cas d’interruption (problème de connexion, etc.), sans perte de données. Dans la mesure du possible, nous vous demandons de réaliser l’expérience en une seule fois.")
     col1, col2 = st.columns(2, vertical_alignment="bottom")
     with col1:
         st.session_state.data = None

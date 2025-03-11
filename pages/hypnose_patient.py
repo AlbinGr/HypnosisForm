@@ -48,12 +48,14 @@ default_details_relaxation = data.get("details_relaxation", "")
 default_experience_transe = data.get("experience_transe", None)
 default_details_transe = data.get("details_transe", "")
 
-data["accord_hypnose_fiable"] = st.slider(
-    "À quel point êtes-vous d’accord avec l’affirmation suivante : L’hypnose est une pratique fiable et efficace. 1 = pas du tout d'accord ; 5 = tout à fait d'accord", 1, 5, default_accord_hypnose_fiable, key="accord_hypnose_fiable")
+options = ["Pas du tout d'accord", "Plutôt pas d'accord", "Neutre", "Plutôt d'accord", "Tout à fait d'accord"]
+data["accord_hypnose_fiable"] = st .select_slider("À quel point êtes-vous d’accord avec l’affirmation suivante : L’hypnose est une pratique fiable et efficace.", \
+    options, default_accord_hypnose_fiable, key="accord_hypnose_fiable")
 
-data["accord_hypnose_impact"] = st.slider(
-    "À quel point êtes-vous d’accord avec l’affirmation suivante : Je crois que l’hypnose peut avoir un impact positif sur moi. 1 = pas du tout d'accord ; 5 = tout à fait d'accord", 1, 5, default_accord_hypnose_impact, key="accord_hypnose_impact")
 
+data["accord_hypnose_impact"] = st.select_slider(
+    "À quel point êtes-vous d’accord avec l’affirmation suivante : Je crois que l’hypnose peut avoir un impact positif sur moi.",\
+    options, default_accord_hypnose_impact, key="accord_hypnose_impact")
 
 data["experience_hypnotherapie_patient"] = "NA"
 
