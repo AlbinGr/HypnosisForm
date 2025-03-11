@@ -63,8 +63,6 @@ if "audio_list" not in data.keys() or data["audio_list"] is None:
     data["results"] = []
     st.session_state["data"] = data
 
-
-
 if "current_audio_path" not in st.session_state.keys():
     st.session_state["current_audio_path"] = st.session_state["data"]["audio_list"][0] if len(st.session_state["data"]["audio_list"]) > 0 else None
 if "current_audio" not in st.session_state.keys():
@@ -77,7 +75,7 @@ if st.session_state["current_audio"] is not None:
 else:
     st.switch_page("pages/lastpage.py")
 
-options = ["Pas du tout d'accord", "Plutôt pas d'accord", "Neutre", "Plutôt d'accord", "Tout à fait d'accord"]
+options = ["1 (Pas du tout d'accord)", "2", "3", "4", "5", "6", "7", "8", "9", "10 (Tout à fait d'accord)"]
 result = st.select_slider("Dans quelle mesure cet enregistrement est-il susceptible d'induire l'état de transe hypnotique ?",\
                           options= options, key="hypnotique", value = None)
 
