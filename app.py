@@ -59,16 +59,16 @@ if "client" in st.session_state.keys():
 
 if understood:
 
-    st.write("Avant de débuter l’expérience, veuillez créer un identifiant personnel et un mot de passe. Ces informations vous permettront de vous reconnecter et de reprendre l’expérience là où vous l’avez laissée en cas d’interruption (problème de connexion, etc.), sans perte de données. Dans la mesure du possible, nous vous demandons de réaliser l’expérience en une seule fois.")
+    st.write("Avant de débuter l’expérience, veuillez créer un nom d'utilisateur et un mot de passe. Ces informations vous permettront de vous reconnecter et de reprendre l’expérience là où vous l’avez laissée en cas d’interruption (problème de connexion, etc.), sans perte de données. Dans la mesure du possible, nous vous demandons de réaliser l’expérience en une seule fois.")
     col1, col2 = st.columns(2, vertical_alignment="bottom")
     with col1:
         st.session_state.data = None
-        login("Login", "pages/formulaire_sd.py")
+        login("Se connecter", "pages/formulaire_sd.py")
     with col2:
         if "current_user" in st.session_state.keys() and st.session_state["current_user"] is not None:
-            logout("Logout", "app.py")
+            logout("Se déconnecter", "app.py")
         else:
-            if st.button("Register"):
+            if st.button("S'enregistrer"):
                 st.session_state.target_page = "pages/formulaire_sd.py"
                 st.switch_page("pages/register.py")
 
