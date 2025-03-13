@@ -30,10 +30,10 @@ def login(button_name="Se connecter", target_page = "app.py"):
 				st.session_state.current_user = hashed_email
 				st.switch_page(target_page)
 			else:
-				st.error("Nom d'utilisateur et mot de passe invalide, veuillez réessayer ou créer un compte en cliquant sur le bouton 'S'enregistrer'")
+				st.error("Nom d'utilisateur et mot de passe invalide, veuillez réessayer ou créez un compte en cliquant sur le bouton 'S'enregistrer'")
 				sleep(2)
 		else:
-			st.error("Nom d'utilisateur et mot de passe invalide, veuillez réessayer ou créer un compte en cliquant sur le bouton 'S'enregistrer'")
+			st.error("Nom d'utilisateur et mot de passe invalide, veuillez réessayer ou créez un compte en cliquant sur le bouton 'S'enregistrer'")
 			sleep(2)
 
 def register(button_name="S'enregistrer", target_page = "app.py"):

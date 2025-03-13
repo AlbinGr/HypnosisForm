@@ -33,7 +33,7 @@ if "data" not in st.session_state.keys() or st.session_state["data"] is None:
 else:
     data = st.session_state["data"]
 
-st.title("Évaluation d'écoute")
+st.title("Expérience")
 
 st.header("Pour information :")
 st.write("L’état de transe hypnotique est un état modifié de conscience caractérisé par :")
@@ -51,7 +51,7 @@ st.write(
 st.header("Qualité d'écoute")
 st.write(""" Avant de commencer l'expérience, veuillez vous munir d'une casque ou d'écouteurs. Vérifiez que le volume est réglé de manière confortable sur votre appareil (téléphone, tablette, ordinateur) de sorte que vous puissiez entendre clairement, sans gêne. Si le son est trop faible ou trop fort, ajustez le volume en conséquence, en gardant une intensité agréable. Une fois le volume réglé, veillez à ne pas le modifier tout au long de l'expérience. Pour tester le volume de votre appareil, cliquez ici :""")
 
-if st.button("Commencer l'évaluation"):
+if st.button("Commencer l'expérience"):
     st.switch_page("pages/evalpage.py")
 # TODO Make this page better (with return etc...)
 
