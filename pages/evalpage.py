@@ -33,22 +33,31 @@ def create_list(client):
     # Get the xlxs file from server
     df = client.get_csv(st.secrets["webdav"]["base_path"] + "Enregistrements_Hypnose_Streamlit.xlsx")
     file_list = []
-    for h in df["Locuteur"].unique():
+    file_list_retest = []
+    file_list_h = []
+    file_list_c = []
+    for l in df["Locuteur"].unique():
         # Create a list of audio for each speaker
-        df_h = df[df["Locuteur"] == h][["Condition (LC, LH)", "Chemin DoX"]]
+        df_l = df[df["Locuteur"] == l][["Condition (LC, LH)", "Chemin DoX"]]
         # Take 3 random LH and 1 random LC
-        df_h = df_h[df_h["Condition (LC, LH)"] == "LH"].sample(3, replace = False)["Chemin DoX"].tolist() +\
-                        df_h[df_h["Condition (LC, LH)"] == "LC"].sample(1)["Chemin DoX"].tolist()
+        df_l_h = df_l[df_l["Condition (LC, LH)"] == "LH"].sample(3, replace = False)["Chemin DoX"].tolist()
+        df_l_c = df_l[df_l["Condition (LC, LH)"] == "LC"].sample(1)["Chemin DoX"].tolist()
+        file_list_h.extend(df_l_h)
+        file_list_c.extend(df_l_c)
 
-        file_list.extend(df_h)
+    file_list_c_retest = np.random.choice(copy.deepcopy(file_list_c), 6, replace = False)
+    file_list_h_retest = np.random.choice(copy.deepcopy(file_list_h), 19, replace = False)
 
-    # 20 % retest
-    retake_list = np.random.choice(file_list, int(0.2*len(file_list)), replace = False)
-    file_list.extend(retake_list)
-    # Save the list to the server
-    client.put_json(st.secrets["webdav"]["base_path"] + f"{h}.json", {"audio_list": file_list, "results": []})
+    file_list.extend(file_list_c)
+    file_list.extend(file_list_h)
 
-    return list(file_list) 
+    file_list_retest.extend(file_list_c_retest)
+    file_list_retest.extend(file_list_h_retest)
+    # Random mixe the list
+    np.random.shuffle(file_list)
+    np.random.shuffle(file_list_retest)
+
+    return file_list + file_list_retest
 
 
 if "data" not in st.session_state.keys() or st.session_state["data"] is None:
@@ -69,6 +78,36 @@ if "current_audio" not in st.session_state.keys():
     st.session_state["current_audio"] = client.get_audio(st.session_state["current_audio_path"]) if st.session_state["current_audio_path"] is not None else None
 
 st.write(f"Il vous reste {len(st.session_state['data']['audio_list'])} enregistrements à évaluer.")
+
+col1, col2 = st.columns(2, vertical_alignment="bottom")
+with col1:
+    if st.button("Etat de transe hypnotique"):
+        if "button_trance_text" not in st.session_state.keys() or st.session_state["button_trance_text"] == False:
+            st.session_state["button_trance_text"] = True
+        else:
+            st.session_state["button_trance_text"] = False
+with col2:
+    if st.button("Consignes"):
+        if "button_consignes_text" not in st.session_state.keys() or st.session_state["button_consignes_text"] == False:
+            st.session_state["button_consignes_text"] = True
+        else:
+            st.session_state["button_consignes_text"] = False
+
+if "button_trance_text" in st.session_state.keys() and st.session_state["button_trance_text"]:
+    st.write("L’état de transe hypnotique est un état modifié de conscience caractérisé par :")
+    st.write("    - une focalisation intense sur une idée ou une sensation")
+    st.write("    - une diminution de la perception de l’environnement extérieur")
+    st.write("    - une ouverture accrue aux suggestions.")
+    st.write("Ce n’est pas une perte de contrôle ou de conscience, mais un état dans lequel on peut ressentir une relaxation profonde, \
+            une distorsion du temps, ou une concentration très spécifique.")
+    
+if "button_consignes_text" in st.session_state.keys() and st.session_state["button_consignes_text"]:
+    st.write(
+	"""Vous allez écouter successivement des enregistrements de maximum 1 minute. Nous ne vous demandons pas de vous focaliser sur le contenu (le sens des mots et / ou des phrases)
+        mais bien sur la façon dont est délivré ce contenu (la voix, la parole). Sur une échelle de 1 (pas du tout) à 10 (tout à fait), vous indiquerez dans quelle mesure l'enregistrement est susceptible 
+        d'induire un état de transe.""")
+
+            
 
 if st.session_state["current_audio"] is not None:
     st.audio(st.session_state["current_audio"][0], autoplay=True, sample_rate=st.session_state["current_audio"][1]) 
