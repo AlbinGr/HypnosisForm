@@ -44,9 +44,13 @@ st.write("Ce n’est pas une perte de contrôle ou de conscience, mais un état 
          une distorsion du temps, ou une concentration très spécifique.")
 st.header("Consigne")
 st.write(
-	"""Vous allez écouter successivement des enregistrements de maximum 1 minute. Nous ne vous demandons pas de vous focaliser sur le contenu (le sens des mots et / ou des phrases)
-        mais bien sur la façon dont est délivré ce contenu (la voix, la parole). Sur une échelle de 1 (pas du tout) à 10 (tout à fait), vous indiquerez dans quelle mesure l'enregistrement est susceptible 
-        d'induire un état de transe.""")
+	"""Avant de commencer l'expérience, veuillez-vous munir d'un casque ou d'écouteurs. Vérifiez que le volume est réglé de manière confortable sur votre appareil (téléphone, tablette, ordinateur) de sorte que vous puissiez entendre clairement, sans gêne. Si le son est trop faible ou trop fort, ajustez le volume en conséquence, en gardant une intensité agréable. Une fois le volume réglé, veillez à ne pas le modifier tout au long de l'expérience.
+L'audio ci-dessous contient un extrait avec le volume le plus faible suivi du volume le plus fort. Veillez donc à ne pas trop augmenter le son dès le début, car la deuxième partie de l'enregistrement pourrait vous surprendre.
+Pour tester le volume de votre appareil, cliquez ici :
+""")
+if "extrait" not in st.session_state.keys():
+    st.session_state["extrait"] = client.get_audio(st.secrets["webdav"]["base_path"] + "extrait_min_max.wav")
+st.audio(st.session_state["extrait"][0], autoplay=False, sample_rate=st.session_state["extrait"][1])
 
 st.header("Qualité d'écoute")
 st.write(""" Avant de commencer l'expérience, veuillez vous munir d'une casque ou d'écouteurs. Vérifiez que le volume est réglé de manière confortable sur votre appareil (téléphone, tablette, ordinateur) de sorte que vous puissiez entendre clairement, sans gêne. Si le son est trop faible ou trop fort, ajustez le volume en conséquence, en gardant une intensité agréable. Une fois le volume réglé, veillez à ne pas le modifier tout au long de l'expérience. Pour tester le volume de votre appareil, cliquez ici :""")
