@@ -121,7 +121,7 @@ result = st.select_slider("Dans quelle mesure cet enregistrement est-il suscepti
 
 if st.button("Suivant"):
     # Save the result in the data
-    st.session_state["data"]["results"].append([st.session_state["current_audio_path"], result, datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
+    st.session_state["data"]["results"].append([st.session_state["current_audio_path"], result, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
     # Remove the current audio from the list
     st.session_state["data"]["audio_list"] = list(st.session_state["data"]["audio_list"][1:])
     # Save the data to server
