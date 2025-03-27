@@ -52,8 +52,8 @@ if "extrait" not in st.session_state.keys():
     st.session_state["extrait"] = client.get_audio(st.secrets["webdav"]["base_path"] + "extrait_min_max.wav")
 st.audio(st.session_state["extrait"][0], autoplay=False, sample_rate=st.session_state["extrait"][1])
 
-st.header("Qualité d'écoute")
-st.write(""" Avant de commencer l'expérience, veuillez vous munir d'une casque ou d'écouteurs. Vérifiez que le volume est réglé de manière confortable sur votre appareil (téléphone, tablette, ordinateur) de sorte que vous puissiez entendre clairement, sans gêne. Si le son est trop faible ou trop fort, ajustez le volume en conséquence, en gardant une intensité agréable. Une fois le volume réglé, veillez à ne pas le modifier tout au long de l'expérience. Pour tester le volume de votre appareil, cliquez ici :""")
+# st.header("Qualité d'écoute")
+# st.write(""" Avant de commencer l'expérience, veuillez vous munir d'une casque ou d'écouteurs. Vérifiez que le volume est réglé de manière confortable sur votre appareil (téléphone, tablette, ordinateur) de sorte que vous puissiez entendre clairement, sans gêne. Si le son est trop faible ou trop fort, ajustez le volume en conséquence, en gardant une intensité agréable. Une fois le volume réglé, veillez à ne pas le modifier tout au long de l'expérience. Pour tester le volume de votre appareil, cliquez ici :""")
 
 if st.button("Commencer l'expérience"):
     st.switch_page("pages/evalpage.py")

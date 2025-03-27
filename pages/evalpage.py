@@ -116,7 +116,7 @@ else:
 
 options = ["1 (Pas du tout d'accord)", "2", "3", "4", "5", "6", "7", "8", "9", "10 (Tout à fait d'accord)"]
 result = st.select_slider("Dans quelle mesure cet enregistrement est-il susceptible d'induire l'état de transe hypnotique ?",\
-                          options= options, key="hypnotique", value = None)
+                          options= options, key=f"hypnotique_{len(st.session_state['data']['audio_list'])}", value = None)
 
 
 if st.button("Suivant"):
