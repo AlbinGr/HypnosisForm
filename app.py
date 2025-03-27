@@ -13,7 +13,7 @@ with st.container(border=True, key=  "consent"):
     st.markdown("### Quel est le but de cette étude et qui la dirige ?")
     st.markdown(""" 
     <div>
-           Nous vous demandons de prendre part à une étude de recherche dont l'objectif est d’étudier l’influence de la voix de l’hypnothérapeute dans l’induction de la transe hypnotique. Cette étude est menée par LORENZINI Leila (leila.lorenzini@ulb.be) et LIENARD Alice (alice.lienard@ulb.be) à l'Université Libre de Bruxelles, sous la supervision de la Professeure REMACLE Angélique (Faculté de Psychologie, des Sciences de l’Education et de Logopédie), et fait partie des travaux associés à un mémoire de fin d'études en logopédie. Cette recherche implique de : 
+           Nous vous demandons de prendre part à une étude de recherche dont l'objectif est d’étudier l’influence de la voix de l’hypnothérapeute dans l’induction de la transe hypnotique. Cette étude est menée par LORENZINI Leila (leila.lorenzini@ulb.be) et LIENARD Alice (alice.lienard@ulb.be) à l'Université Libre de Bruxelles, sous la supervision de la Professeure REMACLE Angélique (Faculté de Psychologie, des Sciences de l’Education et de Logopédie) et du Docteur GRATALOUP Albin (université des sciences appliquées de Bern, groupe de recherche Applied Machine Intelligence), et fait partie des travaux associés à un mémoire de fin d'études en logopédie. Cette recherche implique de : 
     </div>
     <ol style="padding-left: 20px;">
         <li>compléter deux questionnaires reprenant des informations vous concernant comme votre âge, votre genre, votre éventuelle expérience en hypnose, en méditation, ou en musique ;  </li>
